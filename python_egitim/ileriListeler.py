@@ -137,4 +137,22 @@ isim=""
 print(dir(str))
 print(dir(isim))
 
+# %% comprhension
+# slice 
+# rastegele 1,100000 arası sayılardan oluşan 
+# 100 elemananlı liste
+import random
+l1=[]
+for _ in range(100):
+    l1.append(random.randint(1,100000))
+
+l2 = [random.randint(1,100000) for _ in range(100)]
+
+
+# %% 100 elemanlı ve bütün elemanları 0 olan bir liste
+
+l0=[ 0 for _ in range(100)]
+
+# 1-10 arası sayıların karesinin olduğu bir liste
+lkare=[ i**2 for i in range(1,11)]
 # %%
