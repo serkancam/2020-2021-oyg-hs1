@@ -1,18 +1,19 @@
-#%%
-isim=["a","l","i"]
-isim2=str(isim)
-print(type(isim2))
-print(isim2)
-# %%
-nm=""
-nm=nm+"5"
-nm+="7"
-nm+="8"
-print(nm)
+# + operaötrü ile sayıları toplatım
 
-# %%
-isimler=[]
-for i in range(1,5):
-    isim=input("ailenizdeki"+str(i)+". kişi")
+a = 5.0
+b = 10
+print(a+b)
 
-# %%
+# + operatörü iki dizeyi(str) birleşetirir
+
+c= "5.0"
+d="10"
+print(c+d)
+
+# + iki listeyi birleşitirir
+
+sol = [1,2]
+sag=[10,25]
+pivot=7
+
+print(sol+[pivot]+sag)
