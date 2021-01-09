@@ -28,7 +28,7 @@ renk2=(255,0,0)
 thickness=5
 cv2.line(image,start,end,renk,thickness)
 cv2.rectangle(image,start,end,renk2,thickness)
-
+#test
 
 cv2.imshow("resim",image)#image[::2,::2]
 
