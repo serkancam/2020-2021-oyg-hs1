@@ -2,7 +2,7 @@ import cv2
 import os
 
 cd = os.getcwd()
-image_path = os.path.join(cd,"opencv","images","road.jpg")
+image_path = os.path.join(cd,"opencv","images","chp1","road.jpg")
 # print("bulunulan dizin:",cd)
 image = cv2.imread(image_path)
 #resim boyut bilgileri
@@ -18,7 +18,7 @@ ilk_renk = image[0,0]
 print(ilk_renk)
 
 # ilk 100x100 piksel ilk piksel rengine dönüşsün
-image[0:100,0:100]=ilk_renk
+image[0:200,0:100]=ilk_renk
 
 #çizgi çizme
 start = (w//2,h//2)
