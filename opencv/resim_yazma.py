@@ -1,7 +1,7 @@
 import cv2
 import os
 import numpy as np 
-#300x300 px lik bir simsay resim
+#300x300 px lik bir siyay resim
 canvas_r = np.zeros((300,300,3),dtype=np.uint8)
 canvas_c=canvas_r.copy()
 # dörtgen parametreleri
@@ -15,7 +15,7 @@ cv2.rectangle(canvas_r,start,end,color_r,thickness_r)
 center = (150,150)
 radius = 75
 color_c = (255,0,0)
-thickness_c=-1
+thickness_c=-1#-1 içi dolu bir geometrik şekil
 cv2.circle(canvas_c,center,radius,color_c,thickness_c)
 # şekli ekranda gösterdik
 cv2.imshow("Rectangle",canvas_r)

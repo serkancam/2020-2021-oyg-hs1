@@ -14,7 +14,7 @@ h_new = int(h*0.5)
 w_new = int(h_new*aspect)
 dimension = (w_new,h_new)
 zebra_r1 = cv2.resize(src=zebra_o,dsize=dimension,interpolation=cv2.INTER_AREA)
-zebra_r2 = cv2.resize(zebra_o,dsize=None,fx=0.8,fy=0.8,interpolation=cv2.INTER_CUBIC)#
+zebra_r2 = cv2.resize(src=zebra_o,dsize=None,fx=0.5,fy=0.5,interpolation=cv2.INTER_CUBIC)#
 
 cv2.imshow("Original", zebra_o)
 cv2.imshow("R1", zebra_r1)
