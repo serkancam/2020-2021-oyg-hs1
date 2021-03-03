@@ -55,6 +55,19 @@
     <string>Dönen Zebra</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btnYuzTanima">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>530</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Yüz tanıma</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

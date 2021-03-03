@@ -11,13 +11,50 @@ class App(QMainWindow):
     def __init__(self):
         super(App,self).__init__()
         self.ui_path=os.path.join(os.getcwd(),"opencv","animasyon.ui")
+        self.kamera_durumu=False
+        self.yuz_tanima_durumu=False
         self.InitUI()
     
     def InitUI(self):
         self.win=uic.loadUi(self.ui_path,self)
+        #olaylar(event) bağlandı
         self.win.btnKameraAc.clicked.connect(self.kameraAcKapa)
         self.win.btnAnimation.clicked.connect(self.donen_zebra)
+        self.win.btnYuzTanima.clicked.connect(self.yuz_tanima)
         self.win.show()
+    def closeEvent(self,event):
+        self.kamera_durumu=False
+        self.yuz_tanima_durumu=False
+    def yuz_tanima(self):
+        #yüz bulma dosyası
+        face_cascade_path=os.path.join(os.getcwd(),"opencv","haarcascade_frontalface_alt.xml")
+        face_cascade =cv2.CascadeClassifier(face_cascade_path)
+        self.yuz_tanima_durumu = not self.yuz_tanima_durumu
+        self.win.lblCam.clear()
+        cam = cv2.VideoCapture(0)     
+        while self.yuz_tanima_durumu:
+            ret,frame = cam.read()
+            
+            # yuz bulma 
+            gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+            # yuzler = face_cascade.detectMultiScale(gray,1.3,5)
+            yuzler = face_cascade.detectMultiScale(gray,scaleFactor=1.2, minNeighbors=5,minSize=(100,100),flags=cv2.CASCADE_SCALE_IMAGE)
+            for (x,y,w,h)in yuzler:
+                cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+
+            # / yuz bıulma
+            h,w,c=frame.shape
+            step=c*w
+            frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+            qImg = QImage(frame.data, w, h,step, QImage.Format_RGB888)
+            self.win.lblCam.setPixmap(QPixmap.fromImage(qImg))#rgb
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        cam.release()
+
+
     def donen_zebra(self):
          # cam = cv2.VideoCapture(0)
         cd = os.getcwd()
@@ -41,21 +78,28 @@ class App(QMainWindow):
             self.win.lblCam.setPixmap(QPixmap.fromImage(qImg))#rgb
           
             cv2.waitKey(0) # Tek hata wait key :)))
+
     def kameraAcKapa(self):
-        cam = cv2.VideoCapture(0)
-     
-        while True:
+        self.kamera_durumu = not self.kamera_durumu
+        self.win.lblCam.clear()        
+        cam = cv2.VideoCapture(0)     
+        while self.kamera_durumu:
             ret,frame = cam.read()#bgr
+            
             h,w,c=frame.shape
             step=c*w
             frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
             qImg = QImage(frame.data, w, h,step, QImage.Format_RGB888)
-            self.win.lblCam.setPixmap(QPixmap.fromImage(qImg))#rgb
-
+            self.win.lblCam.setPixmap(QPixmap.fromImage(qImg))#rgb            
+            frame = cv2.GaussianBlur(frame,(7,7),0)
+            cv2.imshow("Gaussian",cv2.cvtColor(frame,cv2.COLOR_RGB2BGR))
+            frame=cv2.medianBlur(frame,5)
+            cv2.imshow("Median",cv2.cvtColor(frame,cv2.COLOR_RGB2BGR))
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
         cam.release()
+        cv2.destroyAllWindows()
 # # cd = os.getcwd()
 # image_path = os.path.join(cd,"opencv","images","chp2","zebrasmall.png")
 
